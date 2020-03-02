@@ -1,6 +1,7 @@
 package org.grant.zm.utils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -97,6 +98,18 @@ public class GBeanUtils {
             } catch (Exception e) {
                 System.out.println(field + ":" + e.getMessage());
             }
+        }
+    }
+
+    public static <T> T getInstance(Class<T> cl, Object... args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        if (args.length > 0){
+            Class[] cls = new Class[args.length];
+            for (int i = 0; i < args.length; i++) {
+                cls[i] = args[0].getClass();
+            }
+            return cl.getConstructor(cls).newInstance(args);
+        }else {
+            return cl.getConstructor().newInstance();
         }
     }
 
