@@ -1,5 +1,7 @@
 package org.grant.zm.config;
 
+import io.vavr.control.Option;
+
 /**
  * grant
  * 2/3/2020 9:34 AM
@@ -38,6 +40,26 @@ public abstract class GAbstractConfig extends GConfigExt implements GIConfig {
         }else {
             return Boolean.FALSE;
         }
+    }
+
+    @Override
+    public Integer getPropByInt(String key, Integer def) {
+        return Option.of(getPropByInt(key)).getOrElse(def);
+    }
+
+    @Override
+    public Long getPropByLong(String key, Long def) {
+        return Option.of(getPropByLong(key)).getOrElse(def);
+    }
+
+    @Override
+    public Double getPropByDouble(String key, Double def) {
+        return Option.of(getPropByDouble(key)).getOrElse(def);
+    }
+
+    @Override
+    public String getPropByString(String key, String def) {
+        return Option.of(getPropByString(key)).getOrElse(def);
     }
 
     @Override

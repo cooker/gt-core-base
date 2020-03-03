@@ -1,5 +1,7 @@
 package org.grant.zm.utils;
 
+import io.vavr.API;
+import io.vavr.Function0;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.time.Instant;
@@ -8,6 +10,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import static io.vavr.API.*;
 import static java.time.temporal.ChronoUnit.*;
 
 /**
@@ -64,6 +67,7 @@ public class GDateUtils {
 
     public static Date getAfter(int val, TimeUnit unit) {
         LocalDate localDate = LocalDate.now();
+
         switch (unit){
             case DAYS:
                 localDate.plusDays(val);

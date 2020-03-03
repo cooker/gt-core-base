@@ -1,13 +1,11 @@
 package org.grant.zm.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import io.vavr.control.Try;
 import lombok.extern.slf4j.Slf4j;
-
-import java.io.IOException;
 
 /**
  * ZoomGrant 2020/2/28
@@ -28,16 +26,18 @@ public class GJsonUtils {
 
     }
 
-    public static String toJson(Object obj) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(obj);
+    public static String toJson(Object obj) {
+        return Try.of(()->objectMapper.writeValueAsString(obj)).onFailure(e->{
+                    log.error("bean to json error", e);
+                }
+        ).getOrElse((String)null);
     }
 
     public static <T> T toBean(String json, Class<T> cl){
-        try {
-            return objectMapper.readValue(json, cl);
-        } catch (IOException e) {
-            log.error("json to bean error", e);
-            return null;
-        }
+        return Try.of(()->objectMapper.readValue(json, cl))
+                .onFailure(e->{
+                    log.error("json to bean error", e);
+                })
+                .getOrElse((T)null);
     }
 }

@@ -73,6 +73,10 @@ public class GStringUtils {
         return new StringBuilder();
     }
 
+    public static StringBuilder newBuilder(String str){
+        return new StringBuilder(str);
+    }
+
     /**
      * 根据Unicode编码完美的判断中文汉字和符号
      * @param c

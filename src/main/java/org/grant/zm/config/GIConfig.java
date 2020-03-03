@@ -13,6 +13,11 @@ public interface GIConfig {
     Boolean getPropByBool(String key);
     String getPropByString(String key);
 
+    Integer getPropByInt(String key, Integer def);
+    Long getPropByLong(String key, Long def);
+    Double getPropByDouble(String key, Double def);
+    String getPropByString(String key, String def);
+
     Map<String, String> getMap();
 
     void reload();

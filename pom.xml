@@ -18,6 +18,12 @@
   </properties>
 
   <dependencies>
+    <!-- java 8 函数库-->
+    <dependency>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr</artifactId>
+      <version>0.10.2</version>
+    </dependency>
     <dependency>
       <groupId>javax.jms</groupId>
       <artifactId>jms</artifactId>
@@ -45,6 +51,7 @@
       <artifactId>lombok</artifactId>
       <version>1.18.8</version>
     </dependency>
+    <!--    字节码操作-->
     <dependency>
       <groupId>com.esotericsoftware</groupId>
       <artifactId>reflectasm</artifactId>
