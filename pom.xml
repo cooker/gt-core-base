@@ -18,6 +18,12 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>org.telegram</groupId>
+      <artifactId>telegraph</artifactId>
+      <version>1.0</version>
+      <scope>test</scope>
+    </dependency>
     <!-- java 8 函数库-->
     <dependency>
       <groupId>io.vavr</groupId>
