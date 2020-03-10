@@ -95,4 +95,47 @@ public class GStringUtils {
         }
         return false;
     }
+
+    /**
+     * 遮盖
+     * @param val 原字符串
+     * @param start 起始位置
+     * @param end 结束位置
+     * @param markVal 替换内容
+     * @return
+     */
+    public static String mask(String val, int start, int end, String markVal){
+        if (start > 0 && end < 0){
+            if (start > val.length() + end) {
+                throw new IndexOutOfBoundsException("start > length() + end");
+            }
+        }
+        StringBuilder sb = newBuilder();
+        if (start > 0) {
+            sb.append(val.substring(0, start));
+        }
+        if (end > 0){
+            return sb.append(val.substring(start, end).replaceAll(".", markVal))
+                    .append(val.substring(end, val.length())).toString();
+        }else {
+            return sb.append(
+                    start != 0 ? val.substring(start, val.length() + end).replaceAll(".", markVal) :
+                            val.substring(start, val.length() + end)
+            ).append(
+                    start !=0 ? val.substring(val.length() + end, val.length()) :
+                            val.substring(val.length() + end, val.length()).replaceAll(".", markVal)
+            ).toString();
+        }
+    }
+
+    /**
+     * @see GStringUtils#mask(String, int, int, String)
+     * @param val
+     * @param num
+     * @param markVal
+     * @return
+     */
+    public static String mask(String val, int num, String markVal){
+        return mask(val,0, num, markVal);
+    }
 }

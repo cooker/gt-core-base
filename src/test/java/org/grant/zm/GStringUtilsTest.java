@@ -32,4 +32,11 @@ public class GStringUtilsTest {
     public void money(){
 
     }
+
+    @Test
+    public void mark(){
+        Assert.assertEquals(GStringUtils.mask("1234567890", 2, "*"), "**34567890");
+        Assert.assertEquals(GStringUtils.mask("1234567890", -2, "*"), "12345678**");
+        Assert.assertEquals(GStringUtils.mask("1234567890", 3, -2, "*"), "123*****90");
+    }
 }
