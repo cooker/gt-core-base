@@ -18,13 +18,24 @@
   </properties>
 
   <dependencies>
-    <dependency>
-      <groupId>org.telegram</groupId>
-      <artifactId>telegraph</artifactId>
-      <version>1.0</version>
-      <scope>test</scope>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.telegram</groupId>-->
+<!--      <artifactId>telegraph</artifactId>-->
+<!--      <version>1.0</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
+      <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+      <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+          <version>4.0.1</version>
+          <scope>provided</scope>
+      </dependency>
     <!-- java 8 函数库-->
+      <dependency>
+          <groupId></groupId>
+          <artifactId>servlet</artifactId>
+      </dependency>
     <dependency>
       <groupId>io.vavr</groupId>
       <artifactId>vavr</artifactId>
@@ -70,4 +81,32 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugin</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.1</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>nexus</id>
+      <name>local private nexus</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
 </project>

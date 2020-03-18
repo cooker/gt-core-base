@@ -13,7 +13,7 @@ public class GStringUtilsTest {
     @Test
     public void upper(){
         String str = GStringUtils.toUpperOrLower("我相信aAbss", true, 4);
-        Assert.assertEquals("不一致", str, "我相信aAbsS");
+        Assert.assertEquals("不一致", str, "我相信aAbss");
     }
 
     @Test
