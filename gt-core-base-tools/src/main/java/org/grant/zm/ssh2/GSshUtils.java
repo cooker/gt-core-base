@@ -1,6 +1,7 @@
 package org.grant.zm.ssh2;
 
 import ch.ethz.ssh2.Connection;
+import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -24,6 +25,8 @@ public class GSshUtils {
 
     /**
      * 登录
+     * @see org.grant.zm.ssh2.GSshUtils#logout(Connection)
+     * 需要人工登出
      * @param ip
      * @param port
      * @param username
@@ -55,6 +58,12 @@ public class GSshUtils {
         }
     }
 
+    /**
+     * 执行shell https://www.runoob.com/linux/linux-shell.html
+     * @param con
+     * @param shell
+     * @return
+     */
     public static String exec(Connection con, String shell){
         String ret = "";
         try {
@@ -72,5 +81,9 @@ public class GSshUtils {
             log.warn("ssh2 执行shell异常 [[ {} ]]", shell);
         }
         return ret;
+    }
+
+    public static SCPClient sftp(Connection con) {
+        return new SCPClient(con);
     }
 }

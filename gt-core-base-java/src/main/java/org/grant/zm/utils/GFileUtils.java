@@ -1,11 +1,12 @@
 package org.grant.zm.utils;
 
 import org.apache.commons.lang3.StringUtils;
+import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.nio.file.Paths;
+import java.util.Base64;
 
-import static com.sun.deploy.util.BufferUtil.MB;
 import static org.grant.zm.base.GConstants.*;
 
 /**
@@ -63,7 +64,7 @@ public class GFileUtils {
     /**
      * inputStream 转 File
      */
-    static File inputStreamToFile(InputStream ins, String fileName) throws Exception{
+    public static File inputStreamToFile(InputStream ins, String fileName) throws Exception{
         File file = Paths.get(fileName).toFile();
         if (file.exists()) {
             return file;
@@ -79,6 +80,19 @@ public class GFileUtils {
         ins.close();
         return file;
     }
+
+    public static String toBase64(File file) throws IOException {
+        if (!file.exists()) {
+            return "";
+        }
+
+        FileInputStream fin = new FileInputStream(file);
+        byte[] buffer = new byte[(int)file.length()];
+        fin.read(buffer);
+        fin.close();
+        return Base64.getEncoder().encodeToString(buffer);
+    }
+
 
 
 }

@@ -3,7 +3,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>gt-core-base-dependices</artifactId>
+        <artifactId>gt-core-base</artifactId>
         <groupId>org.grant.zm</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -16,11 +16,19 @@
 
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.grant.zm</groupId>
+            <artifactId>gt-core-base-java</artifactId>
+        </dependency>
         <!-- ssh 工具-->
         <dependency>
             <groupId>ch.ethz.ganymed</groupId>
             <artifactId>ganymed-ssh2</artifactId>
-            <version>262</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -33,7 +41,6 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.5</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
