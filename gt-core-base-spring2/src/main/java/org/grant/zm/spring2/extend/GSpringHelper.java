@@ -1,5 +1,6 @@
 package org.grant.zm.spring2.extend;
 
+import org.aspectj.lang.JoinPoint;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -25,5 +26,14 @@ public class GSpringHelper implements ApplicationContextAware {
 
     public Object getBean(String beanName){
         return context.getBean(beanName);
+    }
+
+    public static Class<?>[] getArgTypes(JoinPoint joinPoint){
+        Object[] args = joinPoint.getArgs();
+        Class<?>[] argTypes = new Class[args.length];
+        for (int i = 0; i < args.length; i++) {
+            argTypes[i] = args[i].getClass();
+        }
+        return argTypes;
     }
 }

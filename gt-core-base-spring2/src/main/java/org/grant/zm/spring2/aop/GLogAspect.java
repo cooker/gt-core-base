@@ -10,6 +10,7 @@ import org.grant.zm.spring2.async.GAsyncCall;
 import org.grant.zm.spring2.database.GLogEntity;
 import org.grant.zm.spring2.database.IGLogInsertHandler;
 import org.grant.zm.spring2.extend.GSpringHelper;
+import org.grant.zm.spring2.extend.GSpringWebHelper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,8 +25,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.StringJoiner;
 
 /**
  * grant
@@ -59,18 +58,10 @@ public class GLogAspect {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes instanceof ServletRequestAttributes) {
             HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
-            Enumeration<String> headerNames = request.getHeaderNames();
-            Enumeration<String> parameterNames = request.getParameterNames();
-            String key = null, val = null;
-            Object[] args = joinPoint.getArgs();
-            Class<?>[] argTypes = new Class[args.length];
-            for (int i = 0; i < args.length; i++) {
-                argTypes[i] = args[i].getClass();
-            }
             String temp = null;
             try {
                 Class targetClass = joinPoint.getTarget().getClass();
-                Method method = ReflectionUtils.findMethod(targetClass, joinPoint.getSignature().getName(), argTypes);
+                Method method = ReflectionUtils.findMethod(targetClass, joinPoint.getSignature().getName(), GSpringHelper.getArgTypes(joinPoint));
                 ReflectionUtils.makeAccessible(method);
                 GLog gLog = method.getAnnotation(GLog.class);
                 GLogEntity entity = makeGLogEntity(gLog);
@@ -79,22 +70,10 @@ public class GLogAspect {
                 Logger log = (Logger) ReflectionUtils.getField(field, joinPoint.getTarget());
                 loggerThreadLocal.set(log);
                 log.info("{} >> {}", request.getMethod(), request.getRequestURI());
-                StringJoiner sj = new StringJoiner(",", "{", "}");
-                while (headerNames.hasMoreElements()){
-                    key = headerNames.nextElement();
-                    val = request.getHeader(key);
-                    sj.add(key + "=" + val);
-                }
-                temp = sj.toString();
+                temp = GSpringWebHelper.getRequestHeadersByJson(request);
                 entity.setHeader(temp);
                 log.info("header >>>> {}", temp);
-                sj = new StringJoiner(",", "{", "}");
-                while (parameterNames.hasMoreElements()) {
-                    key = parameterNames.nextElement();
-                    val = request.getParameter(key);
-                    sj.add(key + "=" + val);
-                }
-                temp = sj.toString();
+                temp = GSpringWebHelper.getRequestParamsByJson(request);
                 entity.setParams(temp);
                 log.info("params >>>> {}", temp);
                 log.info(" ======== body ======== ");
