@@ -1,0 +1,4 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.grant.zm.spring2.config.MultiAutoDataSourceConfigure, \
+  org.grant.zm.spring2.config.GLogAutoAspectConfigure

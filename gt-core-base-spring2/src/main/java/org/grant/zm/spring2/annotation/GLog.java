@@ -1,5 +1,6 @@
 package org.grant.zm.spring2.annotation;
 
+import org.grant.zm.spring2.database.GLogNopInsertHandler;
 import org.grant.zm.spring2.database.IGLogInsertHandler;
 
 import java.lang.annotation.ElementType;
@@ -18,7 +19,7 @@ public @interface GLog {
 
     String value() default "";
 
-    GOperationType operationType();
+    GOperationType operationType() default GOperationType.API;
 
     /**
      * 业务号
@@ -26,5 +27,5 @@ public @interface GLog {
      */
     String paramBusinessNoKey() default "businessNo";
 
-    Class<IGLogInsertHandler> handler();
+    Class<? extends IGLogInsertHandler> handler() default GLogNopInsertHandler.class;
 }

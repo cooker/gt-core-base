@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 public class GithubOssApiTest {
     @Test
     public void put() throws IOException {
-       String resp = new GithubOssApi().uploadByGithub(Paths.get("/Users/grant/Documents/desktop.ini").toFile(),"cooker", "oss", "8bff3fe30553dc43c21c00438e4b800076e09d05");
+       String resp = new GithubOssApi().upload(Paths.get("/Users/grant/Documents/desktop.ini").toFile(),"cooker", "oss", "8bff3fe30553dc43c21c00438e4b800076e09d05");
        System.out.println(resp);
     }
 }

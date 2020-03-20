@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.grant.zm.spring2.annotation.GLog;
 import org.grant.zm.spring2.async.GAsyncCall;
 import org.grant.zm.spring2.database.GLogEntity;
@@ -13,7 +14,6 @@ import org.grant.zm.spring2.extend.GSpringHelper;
 import org.grant.zm.spring2.extend.GSpringWebHelper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StopWatch;
 import org.springframework.web.context.request.RequestAttributes;
@@ -32,7 +32,6 @@ import java.util.Date;
  * 描述：日志切面
  */
 @Aspect
-@Component
 public class GLogAspect {
 
     ThreadLocal<StopWatch> stopWatchThreadLocal = new ThreadLocal<>();
@@ -43,7 +42,6 @@ public class GLogAspect {
     GAsyncCall asyncCall;
     @Autowired
     GSpringHelper springHelper;
-
 
     @Pointcut("@annotation(org.grant.zm.spring2.annotation.GLog)")
     public void log(){
@@ -61,7 +59,7 @@ public class GLogAspect {
             String temp = null;
             try {
                 Class targetClass = joinPoint.getTarget().getClass();
-                Method method = ReflectionUtils.findMethod(targetClass, joinPoint.getSignature().getName(), GSpringHelper.getArgTypes(joinPoint));
+                Method method =((MethodSignature)joinPoint.getSignature()).getMethod();
                 ReflectionUtils.makeAccessible(method);
                 GLog gLog = method.getAnnotation(GLog.class);
                 GLogEntity entity = makeGLogEntity(gLog);
@@ -121,12 +119,12 @@ public class GLogAspect {
             gLogEntityThreadLocal.remove();
             loggerThreadLocal.remove();
             if (entityClone != null && entityClone.getInsertHandler() != null) {
-                Class<IGLogInsertHandler> cl = entityClone.getInsertHandler();
+                Class cl = entityClone.getInsertHandler();
                 GLogEntity entity = entityClone;
                 asyncCall.newCall(new GAsyncCall.Call() {
                     @Override
                     public void call() {
-                        IGLogInsertHandler igLogInsertHandler = springHelper.getBean(cl);
+                        IGLogInsertHandler igLogInsertHandler = (IGLogInsertHandler) springHelper.getBean(cl);
                         igLogInsertHandler.insert(entity);
                     }
                 });

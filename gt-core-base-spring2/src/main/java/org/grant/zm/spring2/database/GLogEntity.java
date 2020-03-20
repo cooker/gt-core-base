@@ -1,6 +1,5 @@
 package org.grant.zm.spring2.database;
 
-import com.sun.istack.internal.Interned;
 import lombok.Data;
 import org.grant.zm.spring2.annotation.GOperationType;
 
@@ -40,7 +39,7 @@ public class GLogEntity implements Serializable {
 
     String body;
 
-    Class<IGLogInsertHandler> insertHandler;
+    Class<? extends IGLogInsertHandler> insertHandler;
 
     @Override
     public GLogEntity clone() {
