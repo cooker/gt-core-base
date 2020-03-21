@@ -17,6 +17,7 @@
         <module>gt-core-base-spring2</module>
         <module>gt-core-base-dependices</module>
         <module>gt-core-base-tools</module>
+        <module>gt-core-base-spring2-test</module>
     </modules>
 
     <name>基礎包 - parent</name>

@@ -6,13 +6,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.Enumeration;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
@@ -61,7 +58,7 @@ public class GRestHelper {
         }
     }
 
-    public String copyParam(String host, int port,HttpServletRequest httpServletRequest) throws UnsupportedEncodingException {
+    public String copyParam(String host, int port,HttpServletRequest httpServletRequest) {
         Enumeration<String> params = httpServletRequest.getParameterNames();
         StringJoiner sb = new StringJoiner("&");
         while (params.hasMoreElements()) {

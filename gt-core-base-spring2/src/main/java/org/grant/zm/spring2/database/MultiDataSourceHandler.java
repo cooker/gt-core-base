@@ -19,7 +19,7 @@ public class MultiDataSourceHandler {
     }
 
     public String getDataSourceName(){
-        return context.get();
+        return context.get() == null ? "master" : context.get();
     }
 
     public void clearDataSourceName(){

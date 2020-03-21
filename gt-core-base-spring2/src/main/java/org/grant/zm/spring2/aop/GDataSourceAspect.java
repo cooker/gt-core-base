@@ -1,5 +1,8 @@
 package org.grant.zm.spring2.aop;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -20,10 +23,11 @@ import java.util.Objects;
  */
 @Order(1)
 @Aspect
+@Slf4j
+@Data
+@AllArgsConstructor
 public class GDataSourceAspect {
 
-
-    @Autowired
     MultiDataSourceHandler multiDataSourceHandler;
 
     @Pointcut("@annotation(org.grant.zm.spring2.annotation.GDataSource)"
@@ -40,6 +44,9 @@ public class GDataSourceAspect {
 
         if (!Objects.isNull(dataSource))
         {
+            if (dataSource.showLog()){
+                log.info("数据源切换 {}#{}===> {}",point.getTarget().getClass().getName(), point.getSignature().getName(), dataSource.value());
+            }
             multiDataSourceHandler.setDataSourceName(dataSource.value());
         }
 

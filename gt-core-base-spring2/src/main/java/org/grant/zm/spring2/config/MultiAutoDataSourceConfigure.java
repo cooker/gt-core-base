@@ -1,8 +1,9 @@
 package org.grant.zm.spring2.config;
 
-import org.grant.zm.spring2.aop.GLogAspect;
+import org.grant.zm.spring2.aop.GDataSourceAspect;
 import org.grant.zm.spring2.database.MultiDataSourceHandler;
 import org.grant.zm.spring2.database.MultiDataSourceProperties;
+import org.grant.zm.spring2.database.MultiDataSourceRegister;
 import org.grant.zm.spring2.database.MultiRoutingDataSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -12,6 +13,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
@@ -26,6 +29,7 @@ import java.util.Map;
 @Configuration
 @ConditionalOnClass(AbstractRoutingDataSource.class)
 @ConditionalOnMissingBean({DataSource.class})
+@Import(MultiDataSourceRegister.class)
 @EnableConfigurationProperties({MultiDataSourceProperties.class})
 public class MultiAutoDataSourceConfigure {
 
@@ -36,29 +40,39 @@ public class MultiAutoDataSourceConfigure {
     }
 
     @Bean
-    public GLogAspect gLogAspect(){
-        return new GLogAspect();
-    }
-
-    @Bean
-    public DataSource maserDataSource(MultiDataSourceProperties properties){
+    @ConditionalOnMissingBean(MultiDataSourceHandler.class)
+    public DataSource masterDataSource(MultiDataSourceProperties properties){
         return properties.getMaster().initializeDataSourceBuilder().build();
     }
 
     @Bean
-    @ConditionalOnBean({DataSource.class, MultiDataSourceHandler.class})
-    public MultiRoutingDataSource salveDataSource(MultiDataSourceHandler handler,
-                                                  DataSource dataSource,
+    @Primary
+    @ConditionalOnBean({MultiDataSourceHandler.class})
+    public MultiRoutingDataSource multiRoutingDataSource(MultiDataSourceHandler handler,
                                                   MultiDataSourceProperties properties){
-        Map<String, DataSourceProperties> salve = properties.getSlave();
-        Map<Object, Object> dSalve = getSalveDataSources(salve);
+        Map<Object, Object> dSalve = getSalveDataSources(properties);
+        DataSource dataSource = properties.getMaster().initializeDataSourceBuilder().build();
+        dSalve.put("master", dataSource);
         return new MultiRoutingDataSource(handler, dataSource, dSalve);
     }
 
-    private Map<Object, Object> getSalveDataSources(Map<String, DataSourceProperties> salve){
+    @Bean
+    @ConditionalOnBean({MultiDataSourceHandler.class})
+    public GDataSourceAspect gDataSourceAspect(MultiDataSourceHandler multiDataSourceHandler){
+        return new GDataSourceAspect(multiDataSourceHandler);
+    }
+
+    private Map<Object, Object> getSalveDataSources(MultiDataSourceProperties properties){
         Map<Object, Object> mDataSource = new HashMap<>();
-        for (String key : salve.keySet()){
-            DataSourceProperties sourceProperties = salve.get(key);
+        for (String key : properties.getSlave().keySet()){
+            DataSourceProperties sourceProperties = properties.getSlave().get(key);
+            if (sourceProperties.getType() == null){
+                try {
+                    sourceProperties.setType((Class<? extends DataSource>) Class.forName("com.zaxxer.hikari.HikariDataSource"));
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
             mDataSource.put(key, sourceProperties.initializeDataSourceBuilder().build());
         }
         return mDataSource;
