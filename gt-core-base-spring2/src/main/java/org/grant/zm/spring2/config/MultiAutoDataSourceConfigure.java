@@ -3,7 +3,6 @@ package org.grant.zm.spring2.config;
 import org.grant.zm.spring2.aop.GDataSourceAspect;
 import org.grant.zm.spring2.database.MultiDataSourceHandler;
 import org.grant.zm.spring2.database.MultiDataSourceProperties;
-import org.grant.zm.spring2.database.MultiDataSourceRegister;
 import org.grant.zm.spring2.database.MultiRoutingDataSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -29,7 +28,6 @@ import java.util.Map;
 @Configuration
 @ConditionalOnClass(AbstractRoutingDataSource.class)
 @ConditionalOnMissingBean({DataSource.class})
-@Import(MultiDataSourceRegister.class)
 @EnableConfigurationProperties({MultiDataSourceProperties.class})
 public class MultiAutoDataSourceConfigure {
 

@@ -6,6 +6,5 @@ package org.grant.zm.spring2.annotation;
  * 描述：使用换成
  */
 public enum GLimitCache {
-    EHCACHE,
     GUAVA
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
  * 20/3/2020 11:24 上午
  * 描述：
  */
-@Component
 public class GLogNopInsertHandler implements IGLogInsertHandler{
 
     @Override

@@ -13,18 +13,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GSpringHelper implements ApplicationContextAware {
-    ApplicationContext context = null;
+    static ApplicationContext context = null;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.context = applicationContext;
     }
 
-    public <T> T getBean(Class<T> cl){
+    public static <T> T getBean(Class<T> cl){
         return context.getBean(cl);
     }
 
-    public Object getBean(String beanName){
+    public static Object getBean(String beanName){
         return context.getBean(beanName);
     }
 

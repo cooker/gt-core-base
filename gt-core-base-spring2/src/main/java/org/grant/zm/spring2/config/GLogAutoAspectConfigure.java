@@ -1,8 +1,10 @@
 package org.grant.zm.spring2.config;
 
 import org.grant.zm.spring2.aop.GLogAspect;
+import org.grant.zm.spring2.database.GLogNopInsertHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /**
  * grant
@@ -15,5 +17,11 @@ public class GLogAutoAspectConfigure {
     @Bean
     public GLogAspect gLogAspect(){
         return new GLogAspect();
+    }
+
+    @Bean
+    @Primary
+    public GLogNopInsertHandler gLogNopInsertHandler(){
+        return new GLogNopInsertHandler();
     }
 }
