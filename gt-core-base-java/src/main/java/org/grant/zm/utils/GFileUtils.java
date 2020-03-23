@@ -64,7 +64,7 @@ public class GFileUtils {
     /**
      * inputStream 转 File
      */
-    public static File inputStreamToFile(InputStream ins, String fileName) throws Exception{
+    public static File inputStreamToFile(InputStream ins, String fileName) throws IOException{
         File file = Paths.get(fileName).toFile();
         if (file.exists()) {
             return file;
