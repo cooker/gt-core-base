@@ -186,6 +186,19 @@
             <layout>default</layout>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
+
+<!--        <snapshotRepository>-->
+<!--            <id>github</id>-->
+<!--            <name>github</name>-->
+<!--            <layout>default</layout>-->
+<!--            <url>https://maven.pkg.github.com/zxm-cooker/maven-repo/</url>-->
+<!--        </snapshotRepository>-->
+<!--        <repository>-->
+<!--            <id>github</id>-->
+<!--            <name>github</name>-->
+<!--            <layout>default</layout>-->
+<!--            <url>https://maven.pkg.github.com/zxm-cooker/maven-repo/</url>-->
+<!--        </repository>-->
     </distributionManagement>
 
     <build>

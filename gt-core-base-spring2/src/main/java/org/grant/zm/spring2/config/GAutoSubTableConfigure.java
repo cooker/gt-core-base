@@ -79,8 +79,8 @@ public class GAutoSubTableConfigure implements ApplicationListener<ApplicationSt
         quartzJob.setId(-1L);
         quartzJob.setJobName("自动建表任务");
         quartzJob.setBeanName("gSubTableTasker");
-//        quartzJob.setCronExpression("0 5 0 * * ?");
-        quartzJob.setCronExpression("0/15 * * * * ?");
+        quartzJob.setCronExpression("0 5 0 * * ?");
+//        quartzJob.setCronExpression("0/15 * * * * ?");
         quartzJob.setIsPause(false);
         quartzJob.setMethodName("runSubTableHanlder");
         quartzJob.setRemark("自动建表");
