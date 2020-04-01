@@ -6,13 +6,18 @@ import org.grant.zm.spring2.annotation.GLimit;
 import org.grant.zm.spring2.annotation.GLog;
 import org.grant.zm.spring2.base.BaseController;
 import org.grant.zm.spring2.base.IGScheduleManager;
+import org.grant.zm.spring2.database.MultiRoutingDataSource;
+import org.grant.zm.spring2.extend.GSpringHelper;
 import org.grant.zm.spring2.scheduling.QuartzJob;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sql.DataSource;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * ZoomGrant 2020/3/21 8:57
@@ -44,6 +49,19 @@ public class HelloAction extends BaseController {
     public String dbYili(){
         Map map = jdbcTemplate.queryForMap("select * from filelogging limit 1");
         return map.toString();
+    }
+
+    @RequestMapping("/show-dbs")
+    public String showDbs(){
+        MultiRoutingDataSource multiRoutingDataSource = GSpringHelper.getBean(MultiRoutingDataSource.class);
+//        return Stream.of(GSpringHelper.getBeanNamesForType(DataSource.class)).collect(Collectors.toList()).toString();
+        return multiRoutingDataSource.getDataSource("master").toString();
+    }
+
+    @RequestMapping("/tasker")
+    public String tasker(){
+//        GSpringHelper.getBean("gSubTableTasker");
+        return "aaaa";
     }
 
 

@@ -121,13 +121,11 @@ public class GLogAspect {
             if (entityClone != null && entityClone.getInsertHandler() != null) {
                 Class cl = entityClone.getInsertHandler();
                 GLogEntity entity = entityClone;
-                asyncCall.newCall(new GAsyncCall.Call() {
-                    @Override
-                    public void call() {
+                asyncCall.newCall(() ->{
                         IGLogInsertHandler igLogInsertHandler = (IGLogInsertHandler) springHelper.getBean(cl);
                         igLogInsertHandler.insert(entity);
                     }
-                });
+                );
             }
         }
     }

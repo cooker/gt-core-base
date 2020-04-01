@@ -4,9 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.grant.zm.spring2.async.GAsyncCall;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * ZoomGrant 2020/3/21 8:44

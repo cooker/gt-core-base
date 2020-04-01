@@ -40,6 +40,10 @@ public class GSshUtils {
             con.connect(null, TIMEOUT, 0);
             if (con.authenticateWithPassword(username, password)) {
                 return con;
+            }else {
+                con.close();
+                log.warn("ssh2 登录失败，用户或密码错误...");
+                return null;
             }
         }catch (IOException e) {
             log.warn("ssh2 登录异常 {} >> {}", ip, port);

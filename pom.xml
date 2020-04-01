@@ -7,6 +7,7 @@
         <artifactId>gt-core-base-dependices</artifactId>
         <groupId>com.github.cooker</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>./gt-core-base-dependices/pom.xml</relativePath>
     </parent>
     <groupId>com.github.cooker</groupId>
     <artifactId>gt-core-base</artifactId>
@@ -18,6 +19,7 @@
         <module>gt-core-base-dependices</module>
         <module>gt-core-base-tools</module>
         <module>gt-core-base-spring2-test</module>
+        <module>gt-core-base-spring2-jpa</module>
     </modules>
 
     <name>基礎包 - parent</name>
@@ -42,4 +44,19 @@
         </repository>
     </repositories>
 
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <name>ossrh</name>
+            <layout>default</layout>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <name>ossrh</name>
+            <layout>default</layout>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 </project>

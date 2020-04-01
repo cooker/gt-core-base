@@ -51,4 +51,14 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <!--配置生成源码包-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

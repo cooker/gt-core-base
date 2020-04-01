@@ -2,6 +2,7 @@ package org.grant.zm.spring2.annotation;
 
 import org.grant.zm.spring2.database.GLogNopInsertHandler;
 import org.grant.zm.spring2.database.IGLogInsertHandler;
+import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,6 +18,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface GLog {
 
+    @AliasFor
     String value() default "";
 
     GOperationType operationType() default GOperationType.API;

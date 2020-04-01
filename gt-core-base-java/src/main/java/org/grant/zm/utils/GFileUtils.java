@@ -1,7 +1,6 @@
 package org.grant.zm.utils;
 
 import org.apache.commons.lang3.StringUtils;
-import sun.misc.BASE64Encoder;
 
 import java.io.*;
 import java.nio.file.Paths;

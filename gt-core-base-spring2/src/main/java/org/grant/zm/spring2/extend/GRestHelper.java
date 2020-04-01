@@ -6,6 +6,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * ZoomGrant 2020/3/19 23:40
  */
 @Component
-public class GRestHelper {
+public class GRestHelper implements ApplicationContextAware {
 
     public Response relayRequest(String host, int port, HttpServletRequest request) throws IOException {
 
@@ -68,4 +71,8 @@ public class GRestHelper {
         return host + ":" + port + httpServletRequest.getRequestURI() + "?" + sb.toString();
     }
 
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+
+    }
 }

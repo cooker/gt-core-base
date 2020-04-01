@@ -11,6 +11,10 @@
 [三方工具 扩展 — gt-core-base-tools](SDK/gt%20core%20base%20tools.md)
 
 ---
+![GitHub stars](https://img.shields.io/github/stars/cooker/gt-core-base?style=social)
+![GitHub repo size](https://img.shields.io/github/repo-size/cooker/gt-core-base)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues-raw/cooker/gt-core-base)
+![GitHub last commit](https://img.shields.io/github/last-commit/cooker/gt-core-base)
 
 [cooker/gt-core-base](https://github.com/cooker/gt-core-base)
 

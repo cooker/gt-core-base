@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class BeanProcess implements BeanPostProcessor, Aware {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        if (bean != null) log.info("bean 初始化前 {}", bean.getClass().getName());
+//        if (bean != null) log.info("bean 初始化前 {}", bean.getClass().getName());
         return bean;
     }
 

@@ -5,6 +5,7 @@ package org.grant.zm.spring2.annotation;
  * 20/3/2020 2:32 下午
  * 描述：
  */
+@Deprecated
 public @interface GSchedule {
 
 }
