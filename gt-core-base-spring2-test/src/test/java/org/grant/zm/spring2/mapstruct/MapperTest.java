@@ -17,6 +17,15 @@ public class MapperTest {
         pytEntity.setName("1111");
         pytEntity.setRmb("100.111111111111199999999999999999");
         System.out.println(ChMapper.INSTANCE.toErpList(Lists.newArrayList(pytEntity)));
+    }
 
+
+    @Test
+    public void toPyt(){
+        ErpEntity pytEntity = new ErpEntity();
+        pytEntity.setSex("男");
+//        pytEntity.setName("1111");
+        pytEntity.setItem(new ErpItemEntity());
+        System.out.println(ChMapper.INSTANCE.toPyt(pytEntity));
     }
 }

@@ -1,17 +1,22 @@
 package org.grant.zm.spring2;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.grant.zm.spring2.annotation.GDataSource;
 import org.grant.zm.spring2.annotation.GLimit;
 import org.grant.zm.spring2.annotation.GLog;
+import org.grant.zm.spring2.base.BadException;
 import org.grant.zm.spring2.base.BaseController;
 import org.grant.zm.spring2.base.IGScheduleManager;
 import org.grant.zm.spring2.database.MultiRoutingDataSource;
 import org.grant.zm.spring2.extend.GSpringHelper;
 import org.grant.zm.spring2.scheduling.QuartzJob;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
@@ -64,6 +69,12 @@ public class HelloAction extends BaseController {
         return "aaaa";
     }
 
+
+    @RequestMapping("/aa")
+    public String error(@RequestParam("id") String id){
+        if (StringUtils.isEmpty(id)) throw new BadException("aaa");
+        return "sasa";
+    }
 
     @Autowired
     IGScheduleManager scheduleManager;

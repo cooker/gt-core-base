@@ -10,9 +10,15 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.DefaultUriBuilderFactory;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +54,6 @@ public class GRestHelper implements ApplicationContextAware {
     public Response relayRequest(String host, HttpServletRequest request) throws IOException {
         return relayRequest(host, 8080, request);
     }
-
 
     public void copyHeader(Request.Builder reqBuilder, HttpServletRequest httpServletRequest){
         Enumeration<String> headers = httpServletRequest.getHeaderNames();

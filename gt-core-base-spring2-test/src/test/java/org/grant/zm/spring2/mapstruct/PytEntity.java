@@ -2,8 +2,6 @@ package org.grant.zm.spring2.mapstruct;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
-
 /**
  * grant
  * 30/3/2020 3:15 下午
@@ -13,4 +11,7 @@ import java.math.BigDecimal;
 public class PytEntity {
     private String rmb;
     private String name;
+    private int sex;
+
+    private PytItemEntity item;
 }

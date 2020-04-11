@@ -20,6 +20,9 @@
         <module>gt-core-base-tools</module>
         <module>gt-core-base-spring2-test</module>
         <module>gt-core-base-spring2-jpa</module>
+        <module>gt-core-base-mapstruct-test</module>
+        <module>gt-core-base-sqlparser-test</module>
+        <module>gt-core-base-linux-test</module>
     </modules>
 
     <name>基礎包 - parent</name>

@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>基础包 - spring2 测试</name>
+    <name>测试案例 - spring2</name>
     <artifactId>gt-core-base-spring2-test</artifactId>
 
     <dependencies>

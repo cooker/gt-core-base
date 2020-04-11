@@ -13,4 +13,7 @@ import java.math.BigDecimal;
 public class ErpEntity {
     private BigDecimal rmb;
     private String nn;
+    private String sex;
+
+    private ErpItemEntity item;
 }

@@ -6,6 +6,6 @@ package org.grant.zm.spring2.async.ic;
  * 描述：
  */
 @FunctionalInterface
-public interface IGAsyncCall$5<A,B,C,D,E> {
-    void call(A a, B b, C c, D d, E e);
+public interface IGAsyncCall_6<A,B,C,D,E,F> {
+    void call(A a, B b, C c, D d, E e, F f);
 }
