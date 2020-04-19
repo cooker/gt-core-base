@@ -23,6 +23,9 @@
         <module>gt-core-base-mapstruct-test</module>
         <module>gt-core-base-sqlparser-test</module>
         <module>gt-core-base-linux-test</module>
+        <module>gt-core-base-maven-plugins</module>
+        <module>gt-core-base-lazy-human</module>
+        <module>gt-core-base-maven-plugins/lazy-human-maven-plugins-test</module>
     </modules>
 
     <name>基礎包 - parent</name>

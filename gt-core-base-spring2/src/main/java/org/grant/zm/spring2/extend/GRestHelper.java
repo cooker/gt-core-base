@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 /**
  * ZoomGrant 2020/3/19 23:40
  */
-@Component
 public class GRestHelper implements ApplicationContextAware {
 
     public Response relayRequest(String host, int port, HttpServletRequest request) throws IOException {

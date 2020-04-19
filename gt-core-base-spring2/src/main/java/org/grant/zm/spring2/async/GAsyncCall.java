@@ -2,7 +2,6 @@ package org.grant.zm.spring2.async;
 
 import org.grant.zm.spring2.async.ic.*;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
  * 描述：
  */
 @Async
-@Component
 public class GAsyncCall {
 
     public void newCall(IGAsyncCall_0 call){

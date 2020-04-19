@@ -16,7 +16,7 @@ public class GJsonUtils {
     static {
         objectMapper = new ObjectMapper();
         //格式美化
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+//        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         //反序列化忽略未知字段
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         //在序列化时忽略值为 null 的属性

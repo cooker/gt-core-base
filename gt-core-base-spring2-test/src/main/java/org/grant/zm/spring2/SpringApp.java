@@ -10,7 +10,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 /**
  * ZoomGrant 2020/3/21 8:14
  */
-@EnableWebSocket
+//@EnableWebSocket
 @EnableScheduling
 @SpringBootApplication
 public class SpringApp {

@@ -14,7 +14,6 @@ import java.io.IOException;
  * 19/3/2020 9:31 下午
  * 描述：
  */
-@Component
 public class GSpringHelper implements ApplicationContextAware {
     static ApplicationContext context = null;
 

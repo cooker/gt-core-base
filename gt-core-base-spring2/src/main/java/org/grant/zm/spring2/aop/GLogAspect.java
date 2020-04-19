@@ -57,32 +57,33 @@ public class GLogAspect {
         if (requestAttributes instanceof ServletRequestAttributes) {
             HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
             String temp = null;
+            Class targetClass = joinPoint.getTarget().getClass();
+            Method method =((MethodSignature)joinPoint.getSignature()).getMethod();
+            ReflectionUtils.makeAccessible(method);
+            GLog gLog = method.getAnnotation(GLog.class);
+            GLogEntity entity = makeGLogEntity(gLog);
+            gLogEntityThreadLocal.set(entity);
+            Field field = ReflectionUtils.findField(targetClass, "log", Logger.class);
+            ReflectionUtils.makeAccessible(field);
+            Logger log = (Logger) ReflectionUtils.getField(field, joinPoint.getTarget());
+            loggerThreadLocal.set(log);
+            log.info("{} >> {}", request.getMethod(), request.getRequestURI());
+            temp = GSpringWebHelper.getRequestHeadersByJson(request);
+            entity.setHeader(temp);
+            log.info("header >>>> {}", temp);
+            temp = GSpringWebHelper.getRequestParamsByJson(request);
+            entity.setParams(temp);
+            log.info("params >>>> {}", temp);
+            log.info(" ======== body ======== ");
+            String body = null;
             try {
-                Class targetClass = joinPoint.getTarget().getClass();
-                Method method =((MethodSignature)joinPoint.getSignature()).getMethod();
-                ReflectionUtils.makeAccessible(method);
-                GLog gLog = method.getAnnotation(GLog.class);
-                GLogEntity entity = makeGLogEntity(gLog);
-                Field field = ReflectionUtils.findField(targetClass, "log", Logger.class);
-                ReflectionUtils.makeAccessible(field);
-                Logger log = (Logger) ReflectionUtils.getField(field, joinPoint.getTarget());
-                loggerThreadLocal.set(log);
-                log.info("{} >> {}", request.getMethod(), request.getRequestURI());
-                temp = GSpringWebHelper.getRequestHeadersByJson(request);
-                entity.setHeader(temp);
-                log.info("header >>>> {}", temp);
-                temp = GSpringWebHelper.getRequestParamsByJson(request);
-                entity.setParams(temp);
-                log.info("params >>>> {}", temp);
-                log.info(" ======== body ======== ");
-                String body = IOUtils.toString(request.getInputStream(), "utf-8");
-                temp = body;
-                entity.setBody(body);
-                log.info("{}", temp);
-                gLogEntityThreadLocal.set(entity);
-            } catch ( IOException e) {
+                body = IOUtils.toString(request.getInputStream(), "utf-8");
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+            temp = body;
+            entity.setBody(temp);
+            log.info("{}", temp);
         }
     }
 

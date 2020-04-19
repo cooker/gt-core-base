@@ -1,6 +1,7 @@
 package org.grant.zm.utils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * grant
@@ -17,6 +18,14 @@ public class GMathUtils {
      */
     public static boolean isEqualsAbs(BigDecimal source, BigDecimal target, BigDecimal allowValue){
         return source.abs().subtract(target.abs()).abs().compareTo(allowValue) <= 0;
+    }
+
+    public static BigDecimal scale(BigDecimal val){
+        return scale(val, 2);
+    }
+    
+    public static BigDecimal scale(BigDecimal val, int scale){
+        return val.setScale(scale, RoundingMode.HALF_UP);
     }
 
 }

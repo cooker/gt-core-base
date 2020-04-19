@@ -4,9 +4,9 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   org.grant.zm.spring2.config.GLogAutoAspectConfigure, \
   org.grant.zm.spring2.config.GAutoScheduleConfigure, \
   org.grant.zm.spring2.config.GAutoLimitConfigure, \
-  org.grant.zm.spring2.config.GAutoSubTableConfigure
+  org.grant.zm.spring2.config.GAutoSubTableConfigure, \
+  org.grant.zm.spring2.config.GAutoCompentConfigure
 
-
-org.springframework.context.ApplicationContextAware=\
-  org.grant.zm.spring2.extend.GSpringHelper, \
-  org.grant.zm.spring2.extend.GRestHelper
+#org.springframework.context.ApplicationContextAware=\
+#  org.grant.zm.spring2.extend.GSpringHelper, \
+#  org.grant.zm.spring2.extend.GRestHelper
