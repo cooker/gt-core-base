@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://106.15.190.158:3306/mybatis?useUnicode=true&characterEncoding=utf8
+    username: ops
+    password: ops123/*-
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    static-path-pattern: /static/**
+#  thymeleaf:
+#    prefix: classpath:/static/
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.github.cooker.entity
+#server:
+#  servlet:
+#    context-path: /sasa

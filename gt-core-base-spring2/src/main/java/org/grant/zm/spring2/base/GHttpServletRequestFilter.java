@@ -4,7 +4,6 @@ import javax.servlet.*;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * grant
@@ -17,7 +16,7 @@ public class GHttpServletRequestFilter extends HttpFilter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        InputStream inputStream = request.getInputStream();
+
         GHttpServletRequestWrapper requestWrapper = new GHttpServletRequestWrapper((HttpServletRequest)request);
         chain.doFilter(requestWrapper, response);
     }

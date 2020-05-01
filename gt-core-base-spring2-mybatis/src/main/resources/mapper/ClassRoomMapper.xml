@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.cooker.mapper.ClassRoomMapper">
+
+    <resultMap id="classroom" type="com.github.cooker.entity.ClassRoom">
+        <id column="id" property="id"></id>
+        <result column="uid" property="uid"></result>
+    </resultMap>
+
+    <resultMap id="classroom_dto" type="com.github.cooker.entity.magic.ClassRoomDto">
+        <id column="id" property="id"></id>
+        <collection property="users" javaType="list" ofType="com.github.cooker.entity.User">
+            <id column="u_id" property="id"></id>
+            <result column="u_name" property="name"></result>
+            <result column="u_sex" property="sex"></result>
+            <result column="u_age" property="age"></result>
+        </collection>
+    </resultMap>
+
+    <sql id="cols">
+        id, uid
+    </sql>
+    <select id="findOne" resultMap="classroom">
+        select <include refid="cols"></include>
+        from class_room where id=#{id} limit 1
+    </select>
+
+    <select id="findPeople" resultMap="classroom_dto">
+        select c.*,
+            u.id u_id,
+            u.name u_name,
+            u.sex u_sex,
+            u.age u_age
+         from class_room c
+        left join user u on u.id = c.uid
+        where c.id = #{id}
+    </select>
+
+
+</mapper>
