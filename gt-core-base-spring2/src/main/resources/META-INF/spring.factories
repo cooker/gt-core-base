@@ -1,11 +1,11 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.grant.zm.spring2.config.MultiAutoDataSourceConfigure,\
-org.grant.zm.spring2.config.GLogAutoAspectConfigure,\
-org.grant.zm.spring2.config.GAutoScheduleConfigure,\
-org.grant.zm.spring2.config.GAutoLimitConfigure,\
-org.grant.zm.spring2.config.GAutoSubTableConfigure,\
-org.grant.zm.spring2.config.GAutoCompentConfigure
+  org.grant.zm.spring2.config.MultiAutoDataSourceConfigure, \
+  org.grant.zm.spring2.config.GLogAutoAspectConfigure, \
+  org.grant.zm.spring2.config.GAutoScheduleConfigure, \
+  org.grant.zm.spring2.config.GAutoLimitConfigure, \
+  org.grant.zm.spring2.config.GAutoSubTableConfigure, \
+  org.grant.zm.spring2.config.GAutoCompentConfigure
 
 #org.springframework.context.ApplicationContextAware=\
 #  org.grant.zm.spring2.extend.GSpringHelper, \
