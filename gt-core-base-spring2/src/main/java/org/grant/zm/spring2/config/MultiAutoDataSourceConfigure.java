@@ -37,7 +37,8 @@ public class MultiAutoDataSourceConfigure {
     }
 
     @Bean
-    @ConditionalOnMissingBean(MultiDataSourceHandler.class)
+    @Primary
+//    @ConditionalOnMissingBean(MultiDataSourceHandler.class)
     public DataSource masterDataSource(MultiDataSourceProperties properties){
         return properties.getMaster().initializeDataSourceBuilder().build();
     }
@@ -61,16 +62,18 @@ public class MultiAutoDataSourceConfigure {
 
     private Map<Object, Object> getSalveDataSources(MultiDataSourceProperties properties){
         Map<Object, Object> mDataSource = new HashMap<>();
-        for (String key : properties.getSlave().keySet()){
-            DataSourceProperties sourceProperties = properties.getSlave().get(key);
-            if (sourceProperties.getType() == null){
-                try {
-                    sourceProperties.setType((Class<? extends DataSource>) Class.forName("com.zaxxer.hikari.HikariDataSource"));
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+        if (null != properties.getSlave()){
+            for (String key : properties.getSlave().keySet()){
+                DataSourceProperties sourceProperties = properties.getSlave().get(key);
+                if (sourceProperties.getType() == null){
+                    try {
+                        sourceProperties.setType((Class<? extends DataSource>) Class.forName("com.zaxxer.hikari.HikariDataSource"));
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 }
+                mDataSource.put(key, sourceProperties.initializeDataSourceBuilder().build());
             }
-            mDataSource.put(key, sourceProperties.initializeDataSourceBuilder().build());
         }
         return mDataSource;
     }

@@ -18,14 +18,13 @@
         <module>gt-core-base-spring2</module>
         <module>gt-core-base-dependices</module>
         <module>gt-core-base-tools</module>
+        <module>gt-core-base-lazy-human</module>
         <module>gt-core-base-spring2-test</module>
         <module>gt-core-base-spring2-jpa</module>
         <module>gt-core-base-mapstruct-test</module>
         <module>gt-core-base-sqlparser-test</module>
         <module>gt-core-base-linux-test</module>
         <module>gt-core-base-maven-plugins</module>
-        <module>gt-core-base-lazy-human</module>
-        <module>gt-core-base-maven-plugins/lazy-human-maven-plugins-test</module>
         <module>gt-core-base-spring2-mybatis</module>
         <module>gt-core-base-leetcode</module>
         <module>gt-core-base-jvm</module>
