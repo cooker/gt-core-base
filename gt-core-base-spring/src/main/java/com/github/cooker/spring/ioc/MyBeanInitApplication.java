@@ -14,4 +14,7 @@ import org.springframework.context.annotation.Import;
 @ComponentScan
 public class MyBeanInitApplication {
 
+    public static void main(String[] args) {
+
+    }
 }
