@@ -4,6 +4,7 @@ import org.grant.zm.spring2.aop.GDataSourceAspect;
 import org.grant.zm.spring2.database.MultiDataSourceHandler;
 import org.grant.zm.spring2.database.MultiDataSourceProperties;
 import org.grant.zm.spring2.database.MultiRoutingDataSource;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -39,19 +40,20 @@ public class MultiAutoDataSourceConfigure {
     @Bean
     @Primary
 //    @ConditionalOnMissingBean(MultiDataSourceHandler.class)
-    public DataSource masterDataSource(MultiDataSourceProperties properties){
-        return properties.getMaster().initializeDataSourceBuilder().build();
+    public DataSource masterDataSource(MultiDataSourceProperties properties, ObjectProvider<DataSource> dataSources){
+        return properties.getMaster() == null ? dataSources.getIfAvailable() : properties.getMaster().initializeDataSourceBuilder().build();
     }
 
     @Bean
     @Primary
     @ConditionalOnBean({MultiDataSourceHandler.class})
     public MultiRoutingDataSource multiRoutingDataSource(MultiDataSourceHandler handler,
-                                                  MultiDataSourceProperties properties){
+                                                         MultiDataSourceProperties properties,
+                                                         ObjectProvider<DataSource> dataSource){
         Map<Object, Object> dSalve = getSalveDataSources(properties);
-        DataSource dataSource = properties.getMaster().initializeDataSourceBuilder().build();
-        dSalve.put("master", dataSource);
-        return new MultiRoutingDataSource(handler, dataSource, dSalve);
+//        DataSource dataSource = properties.getMaster().initializeDataSourceBuilder().build();
+        dSalve.put("master", dataSource.getIfAvailable());
+        return new MultiRoutingDataSource(handler, dataSource.getIfAvailable(), dSalve);
     }
 
     @Bean
