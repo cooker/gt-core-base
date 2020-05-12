@@ -38,22 +38,22 @@ public class MultiAutoDataSourceConfigure {
     }
 
     @Bean
-    @Primary
+//    @Primary
 //    @ConditionalOnMissingBean(MultiDataSourceHandler.class)
-    public DataSource masterDataSource(MultiDataSourceProperties properties, ObjectProvider<DataSource> dataSources){
-        return properties.getMaster() == null ? dataSources.getIfAvailable() : properties.getMaster().initializeDataSourceBuilder().build();
+    @ConditionalOnMissingBean(DataSource.class)
+    public DataSource masterDataSource(MultiDataSourceProperties properties){
+        return properties.getMaster().initializeDataSourceBuilder().build();
     }
 
     @Bean
     @Primary
     @ConditionalOnBean({MultiDataSourceHandler.class})
     public MultiRoutingDataSource multiRoutingDataSource(MultiDataSourceHandler handler,
-                                                         MultiDataSourceProperties properties,
-                                                         ObjectProvider<DataSource> dataSource){
+                                                         MultiDataSourceProperties properties){
         Map<Object, Object> dSalve = getSalveDataSources(properties);
-//        DataSource dataSource = properties.getMaster().initializeDataSourceBuilder().build();
-        dSalve.put("master", dataSource.getIfAvailable());
-        return new MultiRoutingDataSource(handler, dataSource.getIfAvailable(), dSalve);
+        DataSource dataSource = properties.getMaster().initializeDataSourceBuilder().build();
+        dSalve.put("master", dataSource);
+        return new MultiRoutingDataSource(handler, dataSource, dSalve);
     }
 
     @Bean
