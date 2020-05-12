@@ -11,10 +11,10 @@
   </parent>
 
   <groupId>com.github.cooker</groupId>
-  <artifactId>gt-core-base-spring2-mybatis</artifactId>
+  <artifactId>gt-core-base-spring2-mybatis-test</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>gt-core-base-spring2-mybatis</name>
+  <name>gt-core-base-spring2-mybatis-test</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -22,6 +22,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
   </properties>
 
   <dependencies>
@@ -54,13 +55,13 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
-      <version>2.1.0.RELEASE</version>
+      <version>${spring.boot.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
-      <version>2.1.0.RELEASE</version>
+      <version>${spring.boot.version}</version>
     </dependency>
 
     <dependency>
@@ -68,7 +69,12 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.19</version>
     </dependency>
-    
+    <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.1.11</version>
+    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
