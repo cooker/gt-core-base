@@ -32,7 +32,7 @@ import java.util.stream.Stream;
 @RequestMapping("/")
 public class HelloAction extends BaseController {
 
-    @Autowired
+    @Autowired(required = false)
     JdbcTemplate jdbcTemplate;
 
     @RequestMapping("/")

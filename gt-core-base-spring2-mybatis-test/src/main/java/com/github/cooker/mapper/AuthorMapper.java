@@ -1,8 +1,7 @@
 package com.github.cooker.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.github.cooker.entity.Book;
-import com.github.cooker.entity.major.BookMajor;
+import com.github.cooker.entity.Author;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
  * ZoomGrant 2020/5/12 20:26
  */
 @Mapper
-public interface BookMapper extends BaseMapper<Book> {
+public interface AuthorMapper extends BaseMapper<Author> {
 
-    BookMajor findBookM(@Param("id")Integer id);
+    Author selectId(@Param("id") Integer id);
 }

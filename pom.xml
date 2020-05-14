@@ -25,7 +25,7 @@
         <module>gt-core-base-sqlparser-test</module>
         <module>gt-core-base-linux-test</module>
         <module>gt-core-base-maven-plugins</module>
-        <module>gt-core-base-spring2-mybatis</module>
+        <module>gt-core-base-spring2-mybatis-test</module>
         <module>gt-core-base-leetcode</module>
         <module>gt-core-base-jvm</module>
         <module>gt-core-base-spring</module>
